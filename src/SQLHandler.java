@@ -11,7 +11,8 @@ public class SQLHandler {
 			System.out.println("Driver loaded");
 			
 			try {
-				connection = DriverManager.getConnection("jdbc:mysql://mysql.cs.jmu.edu/Cantus2017", "maguirne", "Madison609!");
+				//TODO : Could not get this working for my person username, but could for Norton's Name
+				connection = DriverManager.getConnection("jdbc:mysql://mysql.cs.jmu.edu/BarnhillButtsClermontTran_Manuscript", "nortonml", "visitatio");
 				System.out.println("Connection Made");
 				
 				statement = connection.createStatement();
