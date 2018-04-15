@@ -2,9 +2,8 @@
 public class SystemRun {
 
 	public static void main(String[] args) {
-		System.out.println("Starting the proof of concept");
-		
-		System.out.println("Ending the prood of concept");
+		System.out.println("PA3 Submission for Nicole Maguire and Nick Regan");
+		SQLHandler handler = new SQLHandler();
 	}
 
 }
