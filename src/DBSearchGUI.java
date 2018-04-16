@@ -59,6 +59,10 @@ public class DBSearchGUI extends JFrame {
 		JPanel bottom = new JPanel();
 		contentPane.add(bottom, BorderLayout.SOUTH);
 		
+		String resultLabelString = "Results : ";
+		JLabel resultNumberLabel = new JLabel(resultLabelString + 0);
+		bottom.add(resultNumberLabel);
+		
 		JPanel left = new JPanel();
 		contentPane.add(left, BorderLayout.WEST);
 		
@@ -89,20 +93,25 @@ public class DBSearchGUI extends JFrame {
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (searchKeywordField.getText() == null) {
-					//TODO : add logic to clear the GUI
-					return;
-				}
 				String searchKeyword = searchKeywordField.getText();
 				ArrayList<Chant> results = IncipitSearch.searchForFullText(searchKeyword);
-				
 				resultList.setListData(results.toArray());
+				resultNumberLabel.setText(resultLabelString + results.size());
 			}
 		});
 		top.add(btnSearch);
 		
-		
-		
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchKeywordField.setText("");
+				resultList.clearSelection();
+				String[] emptyList = {};
+				resultList.setListData(emptyList);
+				resultNumberLabel.setText(resultLabelString + 0);
+			}
+		});
+		top.add(btnClear);
 	}
 
 }
