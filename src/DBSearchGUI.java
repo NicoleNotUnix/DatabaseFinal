@@ -19,11 +19,15 @@ import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class DBSearchGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField searchKeywordField;
+	Chant selectedChant;
+	ArrayList<Chant> results;
 
 	/**
 	 * Launch the application.
@@ -63,6 +67,10 @@ public class DBSearchGUI extends JFrame {
 		JLabel resultNumberLabel = new JLabel(resultLabelString + 0);
 		bottom.add(resultNumberLabel);
 		
+		JButton expandViewButton = new JButton("Expanded View");
+		expandViewButton.setEnabled(false);
+		bottom.add(expandViewButton);
+		
 		JPanel left = new JPanel();
 		contentPane.add(left, BorderLayout.WEST);
 		
@@ -73,6 +81,13 @@ public class DBSearchGUI extends JFrame {
 		contentPane.add(center, BorderLayout.CENTER);
 		
 		JList resultList = new JList();
+		resultList.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				expandViewButton.setEnabled(true);
+				int selectionIndex = resultList.getSelectedIndex();
+				selectedChant = results.get(selectionIndex);
+			}
+		});
 		center.setViewportView(resultList);
 		
 		JLabel lblSearchKeywords = new JLabel("Search Keywords");
@@ -94,7 +109,7 @@ public class DBSearchGUI extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String searchKeyword = searchKeywordField.getText();
-				ArrayList<Chant> results = IncipitSearch.searchForFullText(searchKeyword);
+				results = IncipitSearch.searchForFullText(searchKeyword);
 				resultList.setListData(results.toArray());
 				resultNumberLabel.setText(resultLabelString + results.size());
 			}
