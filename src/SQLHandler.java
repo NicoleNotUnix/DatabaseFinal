@@ -274,15 +274,16 @@ public class SQLHandler
 	    {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 	         
-	        // System.out.println("Driver Loaded");
+	        System.out.println("Driver Loaded");
 
 	        try 
 	        {
 	        	//TODO : not the right database
 	        	//TODO : not the right credentials, couldn't get mine to work 
+	        	System.out.println("waiting for connection");
 	        	con = DriverManager.getConnection("jdbc:mysql://mysql.cs.jmu.edu/AlaviFreeman_Manuscript",
 	                                              "nortonml", "visitatio");
-	        	// System.out.println("Connection Made");
+	        	System.out.println("Connection Made");
 	            
 	        	stmt = con.createStatement();
 	        	

@@ -68,6 +68,11 @@ public class DBSearchGUI extends JFrame {
 		bottom.add(resultNumberLabel);
 		
 		JButton expandViewButton = new JButton("Expanded View");
+		expandViewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ExpandedView.run(selectedChant);
+			}
+		});
 		expandViewButton.setEnabled(false);
 		bottom.add(expandViewButton);
 		
