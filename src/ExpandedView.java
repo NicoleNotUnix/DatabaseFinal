@@ -20,6 +20,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ExpandedView extends JFrame {
 
@@ -114,9 +116,9 @@ public class ExpandedView extends JFrame {
 		fullTextPane.setEditable(false);
 		contentPane.add(fullTextPane, BorderLayout.CENTER);
 		
-		String longText = "Full Text : \n";
+		String longText = "Full Text: \n\n";
 		longText += chant.msFullText;
-		longText += "\n\nNotes :\n";
+		longText += "\n\nNotes:\n\n";
 		longText += chant.chantNotes;
 		
 		fullTextPane.setText(longText);
@@ -124,6 +126,11 @@ public class ExpandedView extends JFrame {
 		
 		
 		JButton readAloudButton = new JButton("Read Aloud");
+		readAloudButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Vocals.synthesizeText(chant.msFullText);
+			}
+		});
 		contentPane.add(readAloudButton, BorderLayout.SOUTH);
 	}
 
