@@ -113,7 +113,15 @@ public class ExpandedView extends JFrame {
 		JTextPane fullTextPane = new JTextPane();
 		fullTextPane.setEditable(false);
 		contentPane.add(fullTextPane, BorderLayout.CENTER);
-		fullTextPane.setText(chant.msFullText);
+		
+		String longText = "Full Text \n";
+		longText += chant.msFullText;
+		longText += "\n\nNotes\n";
+		longText += chant.chantNotes;
+		
+		fullTextPane.setText(longText);
+		
+		
 		
 		JButton readAloudButton = new JButton("Read Aloud");
 		contentPane.add(readAloudButton, BorderLayout.SOUTH);
