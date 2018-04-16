@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IncipitSearch {
-	public static List<Chant> searchForFullText(String searchTerm)
+	public static ArrayList<Chant> searchForFullText(String searchTerm)
 	{
 		ArrayList<Chant> matched = new ArrayList<Chant>();
 		SQLHandler handler = SQLHandler.getSQLHandler();
@@ -21,9 +21,9 @@ public class IncipitSearch {
 		System.out.println();
 		
 		while(handler.next(result)) {
-			String fullText = handler.getString(result, 3);
-			if (fullText != null && fullText.contains(searchTerm)) {
-				Chant chant = new Chant(fullText);
+			String incipit = handler.getString(result, 3);
+			if (incipit != null && incipit.contains(searchTerm)) {
+				Chant chant = new Chant(incipit);
 				chant.msSiglum = handler.getString(result, 2);
 				chant.libSiglum = handler.getString(result, 1);
 				matched.add(chant);

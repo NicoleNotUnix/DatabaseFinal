@@ -23,10 +23,18 @@ public class Chant {
 	
 	public String toString() {
 		String toString = "";
-		for (String att : allAttributes)
-		{
-			toString += att + "| ";
-		}
+		toString += formatAtt(libSiglum);
+		toString += formatAtt(msSiglum);
+		toString += formatAtt(sectionID);
+		toString += formatAtt(leafNumber);
+		toString += formatAtt(columnNumber);
+		toString += formatAtt(chantID);
+		toString += formatAtt(msFullText);
 		return toString;
+	}
+	
+	public static String formatAtt(String att)
+	{
+		return att + " |";
 	}
 }
