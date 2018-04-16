@@ -8,7 +8,7 @@ public class IncipitSearch {
 		ArrayList<Chant> matched = new ArrayList<Chant>();
 		SQLHandler handler = SQLHandler.getSQLHandler();
 		
-		String query = "SELECT libSiglum, msSiglum, msFullText FROM Chant WHERE NOT msFullText IS NULL;";
+		String query = "SELECT * FROM Chant WHERE NOT msFullText IS NULL;";
 		ResultSet result = handler.executeQuery(query);
 		System.out.println("Result Set : " + result);
 		
@@ -21,11 +21,9 @@ public class IncipitSearch {
 		System.out.println();
 		
 		while(handler.next(result)) {
-			String incipit = handler.getString(result, 3);
-			if (incipit != null && incipit.contains(searchTerm)) {
-				Chant chant = new Chant(incipit);
-				chant.msSiglum = handler.getString(result, 2);
-				chant.libSiglum = handler.getString(result, 1);
+			String fullText = handler.getString(result, "msFullText");
+			if (fullText != null && fullText.contains(searchTerm)) {
+				Chant chant = new Chant(result);
 				matched.add(chant);
 			}
 		} 

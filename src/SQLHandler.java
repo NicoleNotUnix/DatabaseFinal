@@ -225,6 +225,31 @@ public class SQLHandler
 		
 	} // method getString
 	
+	/**
+	 * Return the value of the column in a resultset as a String
+	 * 
+	 * @param rs
+	 * @param String
+	 * @return String
+	 */
+	public String getString( ResultSet rs, String col )
+	{
+		String value = null;
+		
+		try
+		{
+			value = rs.getString( col );
+			
+		} // end try
+		catch (SQLException e)
+		{
+			handleSQLError( e, "Get String" );
+		} // end catch
+		
+		return value;
+		
+	} // method getString
+	
 	
 	/**
 	 * Move cursor to the next row of the resultset
@@ -278,7 +303,6 @@ public class SQLHandler
 
 	        try 
 	        {
-	        	//TODO : not the right database
 	        	//TODO : not the right credentials, couldn't get mine to work 
 	        	System.out.println("waiting for connection");
 	        	con = DriverManager.getConnection("jdbc:mysql://mysql.cs.jmu.edu/Manuscript2018",
