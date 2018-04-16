@@ -114,9 +114,9 @@ public class ExpandedView extends JFrame {
 		fullTextPane.setEditable(false);
 		contentPane.add(fullTextPane, BorderLayout.CENTER);
 		
-		String longText = "Full Text \n";
+		String longText = "Full Text : \n";
 		longText += chant.msFullText;
-		longText += "\n\nNotes\n";
+		longText += "\n\nNotes :\n";
 		longText += chant.chantNotes;
 		
 		fullTextPane.setText(longText);

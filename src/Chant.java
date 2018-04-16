@@ -41,11 +41,15 @@ public class Chant {
 	private String getAtt(ResultSet result, String attribute)
 	{
 		SQLHandler handler = SQLHandler.getSQLHandler();
-		String attString = handler.getString(result, attribute);
-		if (attString.equals("Null")) {
+		try {
+			String attString = handler.getString(result, attribute);
+			if (attString.equals("Null")) {
+				return "";
+			}
+			return attString;
+		} catch (NullPointerException e) {
 			return "";
 		}
-		return attString;
 	}
 	
 	public String toString() {
