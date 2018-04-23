@@ -6,6 +6,10 @@ public class Chant {
 	String lineNumber, chantID, feastID, officeID, officePosition;
 	String msIncipit, msFullText, rubric, marginalia, addendum, extra, chantNotes;
 	
+	String country = "TEST";
+	String englishTranslation;
+	String countryTranslation = "Country Translation will go here";
+	
 	public Chant()
 	{
 	}
@@ -63,6 +67,24 @@ public class Chant {
 		toString += formatAtt(msFullText);
 		return toString;
 	}
+	
+	public String getEnglishTranslation()
+	{
+		if (englishTranslation != null) {
+			return englishTranslation;
+		}
+		englishTranslation = Translator.translate("la", "en", msFullText);
+		return englishTranslation;
+	}
+	
+	public String getCountryTranslation()
+	{
+		if (countryTranslation != null) {
+			return countryTranslation;
+		}
+		countryTranslation = Translator.translate("la", "en", msFullText);
+		return countryTranslation;
+	} 
 	
 	public static String formatAtt(String att)
 	{

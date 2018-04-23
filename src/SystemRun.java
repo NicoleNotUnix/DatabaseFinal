@@ -7,7 +7,7 @@ public class SystemRun {
 		System.out.println("PA3 Submission for Nicole Maguire and Nick Regan");
 		
 		String searchQuery = "Zelo";
-		List<Chant> results = IncipitSearch.searchForFullText(searchQuery);
+		List<Chant> results = DatabaseSearch.searchForFullText(searchQuery);
 		
 		for (Chant result: results)
 		{

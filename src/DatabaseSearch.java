@@ -2,7 +2,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IncipitSearch {
+public class DatabaseSearch {
 	public static ArrayList<Chant> searchForFullText(String searchTerm)
 	{
 		ArrayList<Chant> matched = new ArrayList<Chant>();

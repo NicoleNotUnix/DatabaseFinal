@@ -22,6 +22,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class ExpandedView extends JFrame {
 
@@ -30,6 +31,7 @@ public class ExpandedView extends JFrame {
 	private JTextField libSiglumField;
 	private JTextField chantIDField;
 	private JTextField sectionIDField;
+	private int selectedTrans;
 
 	/**
 	 * Launch the application.
@@ -112,26 +114,77 @@ public class ExpandedView extends JFrame {
 		panel.add(chantIDField);
 		panel.add(label_4);
 		
-		JTextPane fullTextPane = new JTextPane();
-		fullTextPane.setEditable(false);
-		contentPane.add(fullTextPane, BorderLayout.CENTER);
+		String longText = chant.msFullText;
 		
-		String longText = "Full Text: \n\n";
-		longText += chant.msFullText;
-		longText += "\n\nNotes:\n\n";
-		longText += chant.chantNotes;
+		
+		JPanel panel_1 = new JPanel();
+		contentPane.add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(null);
+		
+		JTextPane fullTextPane = new JTextPane();
+		fullTextPane.setBounds(6, 34, 278, 379);
+		panel_1.add(fullTextPane);
+		fullTextPane.setEditable(false);
 		
 		fullTextPane.setText(longText);
 		
+		JTextPane transTextPane = new JTextPane();
+		transTextPane.setEditable(false);
+		transTextPane.setBounds(306, 34, 278, 379);
+		panel_1.add(transTextPane);
+		transTextPane.setText("");
 		
+		JLabel lblNewLabel_4 = new JLabel("Full Text :");
+		lblNewLabel_4.setBounds(6, 6, 278, 16);
+		panel_1.add(lblNewLabel_4);
 		
-		JButton readAloudButton = new JButton("Read Aloud");
-		readAloudButton.addActionListener(new ActionListener() {
+		selectedTrans = 0;
+		
+		JComboBox transComboBox = new JComboBox();
+		transComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectedTrans = transComboBox.getSelectedIndex();
+				if (selectedTrans == 0) {
+					transTextPane.setText(chant.getEnglishTranslation());
+				} else {
+					String longTransText = "";
+					if (chant.country == null)
+					{
+						longTransText += "Unable to Translate (No country code).";
+					} else {
+						longTransText += chant.getCountryTranslation();
+					}
+					transTextPane.setText(longTransText);
+				}
+				transTextPane.repaint();
+			}
+		});
+		transComboBox.setBounds(306, 2, 278, 27);
+		panel_1.add(transComboBox);
+		
+		transComboBox.addItem("English Text");
+		transComboBox.addItem("Country Text");
+	
+		
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.SOUTH);
+		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JButton readOriginalButton = new JButton("Read Original");
+		panel_2.add(readOriginalButton);
+		
+		JButton readTranslationButton = new JButton("Read Translation");
+		readTranslationButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (selectedTrans == 0) Vocals.synthesizeText(chant.getEnglishTranslation());
+				if (selectedTrans == 1) Vocals.synthesizeText(chant.getCountryTranslation());
+			}
+		});
+		panel_2.add(readTranslationButton);
+		readOriginalButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Vocals.synthesizeText(chant.msFullText);
 			}
 		});
-		contentPane.add(readAloudButton, BorderLayout.SOUTH);
 	}
-
 }

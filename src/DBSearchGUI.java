@@ -49,6 +49,9 @@ public class DBSearchGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public DBSearchGUI() {
+		//Creates the singleton handler here instead of adding time to the search
+		SQLHandler.getSQLHandler();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 515);
 		contentPane = new JPanel();
@@ -114,7 +117,7 @@ public class DBSearchGUI extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String searchKeyword = searchKeywordField.getText();
-				results = IncipitSearch.searchForFullText(searchKeyword);
+				results = DatabaseSearch.searchForFullText(searchKeyword);
 				resultList.setListData(results.toArray());
 				resultNumberLabel.setText(resultLabelString + results.size());
 			}
