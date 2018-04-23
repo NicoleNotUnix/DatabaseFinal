@@ -1,4 +1,5 @@
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Chant {
 	
@@ -6,12 +7,9 @@ public class Chant {
 	String lineNumber, chantID, feastID, officeID, officePosition;
 	String msIncipit, msFullText, rubric, marginalia, addendum, extra, chantNotes;
 	
-	String countryID;
-	String countryName;
-	String countryLanguage;
-	String countryLangCode;
-	String englishTranslation;
-	String countryTranslation;
+	String countryID, countryName, countryLanguage, countryLangCode, englishTranslation, countryTranslation;
+	ArrayList<String> additionalLang = new ArrayList<String>();
+	ArrayList<String> additionalLangCode = new ArrayList<String>();
 	
 	public Chant()
 	{
@@ -45,31 +43,44 @@ public class Chant {
 
 		switch (countryID) {
 		
+			case "CH": //Swiss - German / French / Italian / Romansch
+				additionalLang.add("French");
+				additionalLangCode.add("fr");
+				additionalLang.add("Italian");
+				additionalLangCode.add("it");
 			case "A": // Austria - German 
 			case "D": //Germany - German 
-			case "CH": //Swiss - German 
 				countryLanguage = "German";
 				countryLangCode = "de";
 				break;
 			
+			case "CDN": //Canada - English / French
+				additionalLang.add("French");
+				additionalLangCode.add("fr");
 			case "AUS": //Australia - English
 			case "US": //United States - English
-			case "CDN": //Canada - English
 			case "GB": //Great Britain - English
 				countryLanguage = "English";
 				countryLangCode = "en";
 				break;
 				
-			case "B": //Belgium - Dutch
+			case "B": //Belgium - Dutch / French / German
+				additionalLang.add("French");
+				additionalLangCode.add("fr");
+				additionalLang.add("German");
+				additionalLangCode.add("du");
 			case "NL": //Netherlands - Dutch
 				countryLanguage = "Dutch";
 				countryLangCode = "nl";
 				break;
 						
 			case "H": //Hungary - Hungarian
-			case "CZ": //Czech - Hungarian
 				countryLanguage = "Hungarian";
 				countryLangCode = "hu";
+				break;
+				
+			case "CZ": //Czech - czech
+				//TODO
 				break;
 								
 			case "DK": //Denmark - Danish
@@ -164,7 +175,7 @@ public class Chant {
 	
 	public String getEnglishTranslation()
 	{
-		if (englishTranslation != null) {
+		if (englishTranslation != null && !(englishTranslation.equals(""))) {
 			return alignText(englishTranslation);
 		}
 		englishTranslation = Translator.translate("la", "en", msFullText);

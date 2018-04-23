@@ -134,7 +134,7 @@ public class ExpandedView extends JFrame {
 		transTextPane.setEditable(false);
 		transTextPane.setBounds(306, 34, 278, 379);
 		panel_1.add(transTextPane);
-		transTextPane.setText("");
+		transTextPane.setText(chant.getEnglishTranslation());
 		
 		JLabel lblNewLabel_4 = new JLabel("Full Text :");
 		lblNewLabel_4.setBounds(6, 6, 278, 16);
@@ -146,17 +146,17 @@ public class ExpandedView extends JFrame {
 		transComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				selectedTrans = transComboBox.getSelectedIndex();
-				if (selectedTrans == 0) {
-					transTextPane.setText(chant.getEnglishTranslation());
-				} else {
+				if (selectedTrans == 1 ){
 					String longTransText = "";
 					if (chant.countryID == null)
 					{
-						longTransText += "Unable to Translate (No country ID).";
+						longTransText += "Error : Unable to Translate (No country ID).";
 					} else {
 						longTransText += chant.getCountryTranslation();
 					}
 					transTextPane.setText(longTransText);
+				} else {
+					transTextPane.setText(chant.getEnglishTranslation());
 				}
 				transTextPane.repaint();
 			}
@@ -166,6 +166,9 @@ public class ExpandedView extends JFrame {
 		
 		transComboBox.addItem("English Text");
 		transComboBox.addItem("Country Text : " + chant.countryName + " - " + chant.countryLanguage);
+		for (String lang : chant.additionalLang) {
+			transComboBox.addItem("Country Text : " + chant.countryName + " - " + lang);
+		}
 	
 		
 		JPanel panel_2 = new JPanel();
@@ -178,8 +181,8 @@ public class ExpandedView extends JFrame {
 		JButton readTranslationButton = new JButton("Read Translation");
 		readTranslationButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (selectedTrans == 0) Vocals.synthesizeText(chant.getEnglishTranslation());
 				if (selectedTrans == 1) Vocals.synthesizeText(chant.getCountryTranslation());
+				else Vocals.synthesizeText(chant.getEnglishTranslation());
 			}
 		});
 		panel_2.add(readTranslationButton);
