@@ -116,7 +116,7 @@ public class ExpandedView extends JFrame {
 		panel.add(chantIDField);
 		panel.add(label_4);
 		
-		String longText = chant.msFullText;
+		String longText = chant.getFullTextAligned();
 		
 		
 		JPanel panel_1 = new JPanel();

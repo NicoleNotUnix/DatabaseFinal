@@ -126,6 +126,11 @@ public class Chant {
 		return;
 	}
 	
+	public static String alignText(String text)
+	{
+		return text.replace("| ", "\n");
+	}
+	
 	private String getAtt(ResultSet result, String attribute)
 	{
 		SQLHandler handler = SQLHandler.getSQLHandler();
@@ -152,22 +157,27 @@ public class Chant {
 		return toString;
 	}
 	
+	public String getFullTextAligned()
+	{
+		return alignText(msFullText);
+	}
+	
 	public String getEnglishTranslation()
 	{
 		if (englishTranslation != null) {
-			return englishTranslation;
+			return alignText(englishTranslation);
 		}
 		englishTranslation = Translator.translate("la", "en", msFullText);
-		return englishTranslation;
+		return alignText(englishTranslation);
 	}
 	
 	public String getCountryTranslation()
 	{
 		if (countryTranslation != null) {
-			return countryTranslation;
+			return alignText(countryTranslation);
 		}
 		countryTranslation = Translator.translate("la", countryLangCode, msFullText);
-		return countryTranslation;
+		return alignText(countryTranslation);
 	} 
 	
 	public static String formatAtt(String att)
