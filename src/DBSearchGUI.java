@@ -105,14 +105,6 @@ public class DBSearchGUI extends JFrame {
 		top.add(searchKeywordField);
 		searchKeywordField.setColumns(10);
 		
-		JButton btnRecord = new JButton("Record");
-		btnRecord.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//TODO add logic for record being pressed here
-			}
-		});
-		top.add(btnRecord);
-		
 		JButton btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

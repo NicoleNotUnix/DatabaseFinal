@@ -10,15 +10,6 @@ public class DatabaseSearch {
 		
 		String query = "SELECT * FROM Chant WHERE NOT msFullText IS NULL;";
 		ResultSet result = handler.executeQuery(query);
-		System.out.println("Result Set : " + result);
-		
-		int numColumns = handler.getNumColumns(result);
-		System.out.println("Columns : " + numColumns);
-		for (int i = 1; i <= numColumns; i++)
-		{
-			System.out.print(" " + handler.getHeading(result, i) + " | ");
-		}
-		System.out.println();
 		
 		while(handler.next(result)) {
 			String fullText = handler.getString(result, "msFullText");
@@ -28,8 +19,23 @@ public class DatabaseSearch {
 			}
 		} 
 		
-		System.out.println("Result Size : " + matched.size());
-		
 		return matched;
 	}
+	
+	public static void setCountryInfo(Chant chant)
+	{
+		SQLHandler handler = SQLHandler.getSQLHandler();
+		
+		String query = "SELECT countryID, countryName FROM Library a NATURAL JOIN Country b WHERE a.libSiglum = \""+ chant.libSiglum +"\";";
+		System.out.println(query);
+		ResultSet result = handler.executeQuery(query);
+		
+		System.out.println(result);
+		System.out.println("Got the result");
+		
+		while(handler.next(result)) {
+			chant.setCountryInfo(result);
+		}
+	}
+	
 }

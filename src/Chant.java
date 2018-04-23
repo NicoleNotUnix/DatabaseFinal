@@ -6,9 +6,12 @@ public class Chant {
 	String lineNumber, chantID, feastID, officeID, officePosition;
 	String msIncipit, msFullText, rubric, marginalia, addendum, extra, chantNotes;
 	
-	String country = "TEST";
+	String countryID;
+	String countryName;
+	String countryLanguage;
+	String countryLangCode;
 	String englishTranslation;
-	String countryTranslation = "Country Translation will go here";
+	String countryTranslation;
 	
 	public Chant()
 	{
@@ -33,6 +36,87 @@ public class Chant {
 		addendum = getAtt(result, "addendum");
 		extra = getAtt(result, "extra");
 		chantNotes = getAtt(result, "chantNotes");
+	}
+	
+	public void setCountryInfo(ResultSet result)
+	{
+		countryName = getAtt(result, "countryName");
+		countryID = getAtt(result, "countryID");
+
+		switch (countryID) {
+		
+			case "A": // Austria - German 
+			case "D": //Germany - German 
+			case "CH": //Swiss - German 
+				countryLanguage = "German";
+				countryLangCode = "de";
+				break;
+			
+			case "AUS": //Australia - English
+			case "US": //United States - English
+			case "CDN": //Canada - English
+			case "GB": //Great Britain - English
+				countryLanguage = "English";
+				countryLangCode = "en";
+				break;
+				
+			case "B": //Belgium - Dutch
+			case "NL": //Netherlands - Dutch
+				countryLanguage = "Dutch";
+				countryLangCode = "nl";
+				break;
+						
+			case "H": //Hungary - Hungarian
+			case "CZ": //Czech - Hungarian
+				countryLanguage = "Hungarian";
+				countryLangCode = "hu";
+				break;
+								
+			case "DK": //Denmark - Danish
+				countryLanguage = "Danish";
+				countryLangCode = "da";
+				break;
+				
+			case "E": //Spain - Spanish
+				countryLanguage = "Spanish";
+				countryLangCode = "es";
+				break;
+			
+			case "F": //France - French 
+				countryLanguage = "French";
+				countryLangCode = "fr";
+				break;
+				
+			case "HR": //Croatia - Croatian
+				countryLanguage = "Croatian";
+				countryLangCode = "hr";
+				break;
+				
+			case "I": //Italy - Italian
+				countryLanguage = "Italian";
+				countryLangCode = "it";
+				break;
+				
+			case "PL": //Poland - Polish
+				countryLanguage = "Polish";
+				countryLangCode = "pl";
+				break;
+				
+			case "SI": //Slovenia - slovenian
+				countryLanguage = "Slovenian";
+				countryLangCode = "sl";
+				break;
+				
+			case "TR": //Turkey - Turkish
+				countryLanguage = "Turkish";
+				countryLangCode = "tr";
+				break;
+			
+			default:
+				countryLangCode = "ERROR";
+				countryLanguage = "ERROR";
+				break;
+		}
 	}
 	
 	public Chant(String fullText)
@@ -82,7 +166,7 @@ public class Chant {
 		if (countryTranslation != null) {
 			return countryTranslation;
 		}
-		countryTranslation = Translator.translate("la", "en", msFullText);
+		countryTranslation = Translator.translate("la", countryLangCode, msFullText);
 		return countryTranslation;
 	} 
 	

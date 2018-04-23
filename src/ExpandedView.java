@@ -53,6 +53,8 @@ public class ExpandedView extends JFrame {
 	 * Create the frame.
 	 */
 	public ExpandedView(Chant chant) {
+		DatabaseSearch.setCountryInfo(chant);
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 500);
 		contentPane = new JPanel();
@@ -148,9 +150,9 @@ public class ExpandedView extends JFrame {
 					transTextPane.setText(chant.getEnglishTranslation());
 				} else {
 					String longTransText = "";
-					if (chant.country == null)
+					if (chant.countryID == null)
 					{
-						longTransText += "Unable to Translate (No country code).";
+						longTransText += "Unable to Translate (No country ID).";
 					} else {
 						longTransText += chant.getCountryTranslation();
 					}
@@ -163,7 +165,7 @@ public class ExpandedView extends JFrame {
 		panel_1.add(transComboBox);
 		
 		transComboBox.addItem("English Text");
-		transComboBox.addItem("Country Text");
+		transComboBox.addItem("Country Text : " + chant.countryName + " - " + chant.countryLanguage);
 	
 		
 		JPanel panel_2 = new JPanel();

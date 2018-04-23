@@ -13,6 +13,7 @@ public class Translator {
   private static final String CLIENT_ID = "maguirne@dukes.jmu.edu";
   private static final String CLIENT_SECRET = "38a83a7c130f4efd916fc0fe13d9e645";
   private static final String ENDPOINT = "http://api.whatsmate.net/v1/translation/translate";
+  
 
   /**
    * Sends out a WhatsApp message via WhatsMate WA Gateway.
