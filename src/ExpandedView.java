@@ -175,9 +175,6 @@ public class ExpandedView extends JFrame {
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JButton readOriginalButton = new JButton("Read Original");
-		panel_2.add(readOriginalButton);
-		
 		JButton readTranslationButton = new JButton("Read Translation");
 		readTranslationButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -186,6 +183,9 @@ public class ExpandedView extends JFrame {
 			}
 		});
 		panel_2.add(readTranslationButton);
+		
+		JButton readOriginalButton = new JButton("Read Original");
+		panel_2.add(readOriginalButton);
 		readOriginalButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Vocals.synthesizeText(chant.msFullText);

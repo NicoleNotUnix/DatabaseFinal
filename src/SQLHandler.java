@@ -303,8 +303,8 @@ public class SQLHandler
 
 	        try 
 	        {
-	        	//TODO : not the right credentials, couldn't get mine to work 
 	        	System.out.println("waiting for connection");
+	        	//Database URL 
 	        	con = DriverManager.getConnection("jdbc:mysql://mysql.cs.jmu.edu/Manuscript2018",
 	        										"maguirne", "cs474");
 	        	System.out.println("Connection Made");
